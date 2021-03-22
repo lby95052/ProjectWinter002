@@ -20,6 +20,7 @@ void filewrite(struct SListNode *head);
 void filewriteA(struct SListNode *head);
 void BubbleSort(struct SListNode *head);
 void QuickSort(struct SListNode *head);
+void HeapSort(struct SListNode *head);
 int  main(void){
 
     struct SListNode *head = NULL;

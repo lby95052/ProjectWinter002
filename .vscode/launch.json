@@ -11,11 +11,11 @@
             "program": "${fileDirname}\\main.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "C:\\mingw64\\bin",
+            "cwd": "E:\\mingw64\\bin",
             "environment": [],
             // "console": "externalTerminal",
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
+            "miDebuggerPath": "E:\\mingw64\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",

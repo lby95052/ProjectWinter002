@@ -13,7 +13,7 @@ void filewrite(struct SListNode *head)
 
    printf("\n已经跳转到filewrite.c!\n");
    struct SListNode *p=head->_PNext;
-   FILE *w =fopen("C:\\Users\\Administrator\\Desktop\\new2\\ProjectWinter002\\result.txt","w");
+   FILE *w =fopen("E:\\02\\ProjectWinter002\\result.txt","w");
    if(w==NULL)
    {
        printf("打开文件失败!");

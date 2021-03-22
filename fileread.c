@@ -25,7 +25,7 @@ FILE* fileread()
 
 	// printf("%s is file path\n", filename);
 
-	if ((fp = fopen("C:\\Users\\Administrator\\Desktop\\new2\\ProjectWinter002\\user_login.txt", "r+")) == NULL)
+	if ((fp = fopen("E:\\02\\ProjectWinter002\\user_login.txt", "r+")) == NULL)
 	{
 		printf("Cannot open this file\n");
 	}
