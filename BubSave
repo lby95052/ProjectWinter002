@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "head.h"
+
+void BubbleSort(struct SListNode *head)
+{
+    
+    Node *temp,*temp1,*temp2;
+    temp = head;
+    temp1 = head->_PNext;
+    temp2 = temp1->_PNext;
+    int flag=1;
+    while(flag)
+    {
+    flag = 0;
+    while(temp2)
+    {
+        if(temp1->_data.totalcount < temp2->_data.totalcount)//比较大小
+        {
+            temp1->_PNext = temp2->_PNext;
+            temp2->_PNext = temp1;//将指针指向
+            temp->_PNext = temp2;
+            flag=1;//重置循环
+        }
+        else
+        temp = temp1;//向下继续
+
+        temp1 = temp2;
+        temp2 = temp2->_PNext;
+    }
+    
+    }
+
+    return head;
+}
