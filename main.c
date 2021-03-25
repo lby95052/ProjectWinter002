@@ -29,17 +29,24 @@ int  main(void){
 
     struct SListNode *head = NULL;
     FILE *fp1;
-
-    
     // struct User_login *line1 = NULL;
 
     printf("file open\n");
     //struct User_login Datanode;
+    struct SListNode *Bhead;
 
+    
     fp1 = fileread();
     printf("\n");
-
     head = list(fp1, head);
+    Bhead = head;
+
+    BinTree BST = NULL;
+    BST = createBST(Bhead, BST);    
+   
+
+
+    //head = list(fp1, head);
 
     filewrite(head);
 
