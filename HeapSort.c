@@ -4,60 +4,104 @@
 #include <assert.h>
 #include <stddef.h>
 #include <string.h>
-void Sort(struct SListNode *Head,struct SListNode *Tail);
-void HeapSort(struct SListNode *Head);
-void getend(struct SListNode *Head);
-
-void HeapSort(struct SListNode *Head)
-{
-    getend(Head);
-}
-
-
-void getend(struct SListNode *Head)
-{
-    struct SListNode *end;
-     struct SListNode *temp;
-    temp = Head;
-
-    while (temp->_PNext != NULL)
-    {
-        temp = temp->_PNext;
-    }
-    
-    end = temp;
-
-    Sort(Head,end);
-}
 
 
 
-void Sort(struct SListNode *Head,struct SListNode *Tail)
-{
-	if(Head->_PNext!=Tail&&Head->_PNext->_PNext!=Tail)
+// typedef struct User_login{
+// char name[LENGTH]; //用户名
+// int totalcount; //登录次数
+// }SDataType; //链表的节点
+
+// typedef struct SListNode
+// {
+// SDataType _data;
+// struct SListNode* _PNext;
+// }Node,*PNode; //封装链表节点和 next 指针
+void build_heap(SDataType array[],int n );
+void heapify(SDataType array[],int n, int i);
+
+
+
+void HeapSort(struct SListNode* head )
+{//slist
+
+	printf("\n已经跳转到HeapSort.c!\n");
+    int listsize= SListSize(head);					//获取链表长度
+
+    SDataType *array=(SDataType *)malloc(sizeof(SDataType)*listsize); //创建长度为链表长度的空间
+	struct SListNode *pCur=NULL;
+    pCur = head->_PNext;
+    int i;
+
+    for(i=0;i<listsize;i++){
+        strcpy(array[i].name,pCur->_data.name);
+        array[i].totalcount=pCur->_data.totalcount;
+        pCur = pCur->_PNext;        
+    }//复制数组数据到链表内部
+
+	build_heap(array,listsize);
+	for(i=listsize-1; i>=0; i--)
 	{
-		static int count;
-		printf("QuickSort调用第%d次数\n",count++);
+		SDataType temp;   
+		temp.totalcount = array[0].totalcount;          
+        strcpy(temp.name,array[0].name);
 
-		struct SListNode *KeyP=Head->_PNext;      //指向存key值内存单元的指针
+		array[0].totalcount = array[i].totalcount;          
+        strcpy(array[0].name,array[i].name);
 
-		struct SListNode *LP=Head;              //比key值小的游标指针,KeyP的左边
-		struct SListNode *RP=KeyP;              //比key值大的游标指针,KeyP的右边
-		struct SListNode *IncP=KeyP->_PNext;      //遍历单链表的游标指针,每次移动一位
-		while(IncP!=Tail)
-		{
-			if(IncP->_data.totalcount > KeyP->_data.totalcount)
-				LP=LP->_PNext=IncP;
-			else
-				RP=RP->_PNext=IncP;
-			IncP=IncP->_PNext;
-		}
-		LP->_PNext=KeyP;    //将小于Key值的子链表衔接
-		RP->_PNext=Tail;    //将大于Key值的子链表衔接
+		array[i].totalcount = temp.totalcount;          
+        strcpy(array[i].name,temp.name);
 
-		//递归
-		Sort(Head,KeyP); //比Key小的子链表排序
-		Sort(KeyP,Tail); //比Key大的子链表排序
-		//注Head和Tail是不参与排序的，只起表头和表尾标识作用,故原链表的Tail值为NULL
+		//heapify(array,i,0);
+	}
+
+	pCur = head->_PNext; //指向头节点
+
+    i=0;
+
+    while (pCur) {
+        strcpy(pCur->_data.name,array[i].name);
+        pCur->_data.totalcount = array[i].totalcount;
+        pCur = pCur->_PNext; 
+        i++;
+    }
+	//复制数组数据到链表内部
+    //free(array);
+}
+
+void build_heap(SDataType array[],int n )
+{
+	int last_node =n-1;  		//最后一个节点
+	int parent=(last_node-1)/2;
+	int i;
+	for(i=parent;i>=0;i--){		
+		heapify(array,n,i);
+	}
+}
+
+void heapify(SDataType array[],int n, int i)
+{
+	if(i >= n)
+		return;
+	int c1=2 * i + 1;
+	int c2=2 * i + 2;
+	int max = i;
+	if(c1 < n && array[c1].totalcount<array[max].totalcount)
+		max=c1;
+	if(c2 < n && array[c2].totalcount<array[max].totalcount)
+		max=c2;
+		//取最大值
+	if(max != i){
+		SDataType temp ;   
+		temp.totalcount = array[i].totalcount;          
+        strcpy(temp.name,array[i].name);
+
+		array[i].totalcount = array[max].totalcount;          
+        strcpy(array[i].name,array[max].name);
+
+		array[max].totalcount = temp.totalcount;          
+        strcpy(array[max].name,temp.name);
+
+		heapify(array, n, max);
 	}
 }

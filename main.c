@@ -1,5 +1,9 @@
 #include<stdio.h>
 #include"head.h"
+#include <stdlib.h>
+#include <assert.h>
+#include <stddef.h>
+#include <string.h>
 
 // #define LENGTH 30
 
@@ -40,8 +44,8 @@ int  main(void){
     filewrite(head);
 
     // BubbleSort(head);
-    //QuickSort(head);
-    HeapSort(head);
+    QuickSort(head);
+    //HeapSort(head);
 
     filewriteA(head);
 

@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "head.h"
+#include <assert.h>
+#include <stddef.h>
+#include <string.h>
 // #define LENGTH 30
 
 // typedef struct User_login{
@@ -23,6 +25,18 @@ void DelNode(struct SListNode *head);
 void DelNode(struct SListNode *head);
 void AddNode(struct SListNode *head);
 void FreeList(struct SListNode *head);
+
+int SListSize(struct SListNode* s) {            //获取链表有效节点的个数
+ assert(s);
+ int count = 0;
+ PNode pCur = s->_PNext;
+ while (pCur) {
+  count++;
+  pCur = pCur->_PNext;
+ }
+ return count;
+}
+
 
 Node *CreatList(FILE *fp1, struct SListNode *head)
 {
